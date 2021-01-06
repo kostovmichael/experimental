@@ -1,4 +1,6 @@
-namespace MvcAndWebApiDotNetFive.Models
+using System;
+
+namespace MvcAndWebApiDotNetThree.Models
 {
     public class ErrorViewModel
     {

@@ -7,16 +7,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
-COPY ["MvcSample/MvcSample.csproj", "MvcSample/"]
-RUN dotnet restore "MvcSample/MvcSample.csproj"
+COPY ["MvcAndWebApiDotNetFive/MvcAndWebApiDotNetFive.csproj", "MvcAndWebApiDotNetFive/"]
+RUN dotnet restore "MvcAndWebApiDotNetFive/MvcAndWebApiDotNetFive.csproj"
 COPY . .
-WORKDIR "/src/MvcSample"
-RUN dotnet build "MvcSample.csproj" -c Release -o /app/build
+WORKDIR "/src/MvcAndWebApiDotNetFive"
+RUN dotnet build "MvcAndWebApiDotNetFive.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "MvcSample.csproj" -c Release -o /app/publish
+RUN dotnet publish "MvcAndWebApiDotNetFive.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "MvcSample.dll"]
+ENTRYPOINT ["dotnet", "MvcAndWebApiDotNetFive.dll"]

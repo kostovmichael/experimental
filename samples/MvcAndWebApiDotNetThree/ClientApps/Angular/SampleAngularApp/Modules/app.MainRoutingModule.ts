@@ -4,8 +4,16 @@ import { HomePageComponent } from "../Components/HomePageComponent";
 
 const appRoutes: Routes = [
     {
-        path: "/",
+        path: "AngularSample",
         component: HomePageComponent,
+    },
+    {
+        path: "AngularSample/Landing/Main",
+        component: HomePageComponent,
+    },
+    {
+        path: "AngularSample/Landing/TestPageOne",
+        loadChildren: "../LazyLoaded/Modules/TestPageOne.Module#TestPageOneModule",
     },
 ];
 

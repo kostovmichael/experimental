@@ -8,17 +8,25 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 
 namespace MvcAndWebApiDotNetThree.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IConfiguration _configuration;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public HomeController(ILogger<HomeController> logger)
+      public HomeController(ILogger<HomeController> logger,
+         IConfiguration configuration,
+         IWebHostEnvironment hostEnvironment)
         {
-            _logger = logger;
-        }
+            this._logger = logger;
+            this._configuration = configuration;
+            this._hostEnvironment = hostEnvironment;
+      }
 
         public IActionResult Index()
         {

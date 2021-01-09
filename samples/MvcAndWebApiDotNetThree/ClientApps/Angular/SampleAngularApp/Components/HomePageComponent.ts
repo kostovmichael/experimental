@@ -2,10 +2,9 @@ import { Component } from "@angular/core";
 
 @Component({
     selector: "mysampleapp-home",
-    template: `<h2>Hello from home page</h2>`,
+    template: `<p> </p><h2>Hello from the HomePageComponent</h2> <p></p
+        ><p>
+            <a routerLink="/AngularSample/Landing/TestPageOne">Test Page One (lazy load) </a>
+        </p>`,
 })
 export class HomePageComponent {}
-
-function getMyAccountMainTemplateUrl() {
-    return document.getElementsByTagName("base")[0].href + "help-center/MainHc/HelpCenterHome";
-}

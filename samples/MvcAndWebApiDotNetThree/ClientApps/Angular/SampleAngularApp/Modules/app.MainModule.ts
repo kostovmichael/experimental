@@ -4,7 +4,7 @@ import { FormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { HttpClientModule, HttpClientXsrfModule } from "@angular/common/http";
 import { MainRoutingModule } from "./App.MainRoutingModule";
-import { MainComponent } from "../Components/app.MainComponent";
+import { HomePageComponent } from "../Components/HomePageComponent";
 
 @NgModule({
     imports: [
@@ -18,9 +18,9 @@ import { MainComponent } from "../Components/app.MainComponent";
         }),
         MainRoutingModule,
     ],
-    exports: [MainComponent],
-    declarations: [MainComponent],
-    bootstrap: [MainComponent],
+    exports: [HomePageComponent],
+    declarations: [HomePageComponent],
+    bootstrap: [HomePageComponent],
 })
 
 //HelpCenterMainComponent

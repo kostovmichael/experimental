@@ -49,7 +49,15 @@ namespace MvcAndWebApiDotNetThree
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
+               //endpoints.MapControllerRoute(
+               //   name: "AreasConfiguration",
+               //   pattern: "{area:exists}/{controller=Landing}/{action=Main}");
+               
+               endpoints.MapAreaControllerRoute(
+                  name: "MyAreaAngularSample",
+                  areaName: "AngularSample",
+                  pattern: "AngularSample/{controller=Landing}/{action=Main}/{id?}");
+               endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });

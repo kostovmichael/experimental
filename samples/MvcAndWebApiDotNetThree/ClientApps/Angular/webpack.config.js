@@ -4,8 +4,8 @@ const webpack = require("webpack");
 const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 const clientBundleOutputDir = "../../wwwroot/dev/sampleangular";
 const clientBundleOutputDirPROD = "../../wwwroot/prod/sampleangular";
-const publicPathDEV = "dev/";
-const publicPathPROD = "prod/";
+const publicPathDEV = "dev/sampleangular/";
+const publicPathPROD = "prod/sampleangular/";
 //const AotPlugin = require('@ngtools/webpack').AotPlugin;
 const ENV = (process.env.NODE_ENV = process.env.ENV); // = "development";
 

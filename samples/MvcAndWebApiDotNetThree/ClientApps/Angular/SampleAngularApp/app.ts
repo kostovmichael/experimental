@@ -1,9 +1,9 @@
-﻿import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
-import { MainEntryModule } from "./Modules/app.MainEntryModule";
-import { enableProdMode } from "@angular/core";
+﻿import { platformBrowserDynamic } from "@angular/platform-browser-dynamic"
+import { MainEntryModule } from "./Modules/app.MainEntryModule"
+import { enableProdMode } from "@angular/core"
 
-console.log(process.env.ENV);
+console.log("process.env.ENV: " + process.env.ENV)
 if (process.env.ENV === "production") {
-    enableProdMode();
+  enableProdMode()
 }
-platformBrowserDynamic().bootstrapModule(MainEntryModule);
+platformBrowserDynamic().bootstrapModule(MainEntryModule)

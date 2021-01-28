@@ -1,5 +1,18 @@
 package com.algexperimental;
 
+
+/******************************************************************************
+ *  Compilation:  javac WeightedQuickUnionUF.java
+ *  Execution:  java WeightedQuickUnionUF < input.txt
+ *  Dependencies: StdIn.java StdOut.java
+ *  Data files:   https://algs4.cs.princeton.edu/15uf/tinyUF.txt
+ *                https://algs4.cs.princeton.edu/15uf/mediumUF.txt
+ *                https://algs4.cs.princeton.edu/15uf/largeUF.txt
+ *
+ *  Weighted quick-union (without path compression).
+ *
+ ******************************************************************************/
+
 public class WeightedQuickUnionUF {
 
     private int[] parent;   // parent[i] = parent of i

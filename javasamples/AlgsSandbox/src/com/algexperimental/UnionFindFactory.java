@@ -1,8 +1,10 @@
 package com.algexperimental;
 
+import java.net.URL;
+
 public class UnionFindFactory {
 
-    public void BuildWeightedQuickUnionUF(String url){
+    public void BuildWeightedQuickUnionUF(URL url){
         new In(url);
         int n = StdIn.readInt();
         WeightedQuickUnionUF uf = new WeightedQuickUnionUF(n);

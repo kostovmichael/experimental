@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvcAndWebApiDotNetThree", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sharedlibraries", "sharedlibraries", "{EF419EB5-16B9-4433-A91D-53E06D30CD1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerformanceConcepts", "PerformanceConcepts\PerformanceConcepts.csproj", "{2D2CDA3B-50A3-4A57-B20F-CAAE9FB54A27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatternsAndConcepts", "PerformanceConcepts\PatternsAndConcepts.csproj", "{2D2CDA3B-50A3-4A57-B20F-CAAE9FB54A27}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Legacy", "Legacy", "{CCE068EE-BF0C-4814-82F5-A032701C779D}"
 EndProject

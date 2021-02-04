@@ -7,9 +7,11 @@ namespace BenchmarkNetPlayground
     {
         static void Main(string[] args)
         {
+            //Dictionary Benchmarks
+            //BenchmarkRunner.Run<Optimizations.BasicHashMapOperations>();
 
-            BenchmarkRunner.Run<Optimizations.BasicHashMapOperations>();
-            //BenchmarkRunner.Run<Optimizations.Inlining>();
+            //Compiler Inlining Benchmarks
+            BenchmarkRunner.Run<Optimizations.Inlining>();
         }
 
     }

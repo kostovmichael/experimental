@@ -8,10 +8,10 @@ namespace BenchmarkNetPlayground
         static void Main(string[] args)
         {
             //Dictionary Benchmarks
-            //BenchmarkRunner.Run<Optimizations.BasicHashMapOperations>();
+            BenchmarkRunner.Run<Optimizations.DictionaryWithOrWithoutSupplyingInitialCount>();
 
             //Compiler Inlining Benchmarks
-            BenchmarkRunner.Run<Optimizations.Inlining>();
+            //BenchmarkRunner.Run<Optimizations.Inlining>();
         }
 
     }

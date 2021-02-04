@@ -22,9 +22,6 @@ namespace BenchmarkNetPlayground.Services
             return appDataDirectoryPath;
         }
 
-
-
-
         public static string[] GetCommonWordsTestData()
         {
             return GetTestDataStringArrayFromFile("CommonWords.txt", newLineSeparator);

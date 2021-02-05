@@ -1,19 +1,17 @@
 ﻿namespace BenchmarkNetPlayground.Optimizations
 {
     using BenchmarkDotNet.Attributes;
-    using BenchmarkDotNet.Exporters;
-    using BenchmarkDotNet.Jobs;
 
     using Services;
 
     using System.Collections.Generic;
 
-    [SimpleJob(RuntimeMoniker.Net472), SimpleJob(RuntimeMoniker.CoreRt31)]
+    //[SimpleJob(RuntimeMoniker.Net472), SimpleJob(RuntimeMoniker.CoreRt31)]
 
-    //https://benchmarkdotnet.org/articles/configs/diagnosers.html
-    [MemoryDiagnoser]
-    [ArtifactsPath(@"C:\ProgAppLogs")]
-    [HtmlExporter]
+    ////https://benchmarkdotnet.org/articles/configs/diagnosers.html
+    //[MemoryDiagnoser]
+    //[ArtifactsPath(@"C:\ProgAppLogs")]
+    //[HtmlExporter]
     public class DictionaryWithOrWithoutSupplyingInitialCount
     {
         private static string[] arrayOfStrings;

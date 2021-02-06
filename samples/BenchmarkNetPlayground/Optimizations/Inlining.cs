@@ -5,6 +5,8 @@
     using BenchmarkDotNet.Exporters;
     using BenchmarkDotNet.Jobs;
 
+    using Configs;
+
     using System.Runtime.CompilerServices;
 
     [SimpleJob(RuntimeMoniker.Net472), SimpleJob(RuntimeMoniker.CoreRt31)]
@@ -13,7 +15,7 @@
 
     [InliningDiagnoser(true, true)]
     //[MemoryDiagnoser]
-    [ArtifactsPath(@"C:\ProgAppLogs")]
+    [ArtifactsPath(ManualConfigurations.ArtifactsPath)]
     [MarkdownExporterAttribute.Atlassian, HtmlExporter]
     public class Inlining
     {

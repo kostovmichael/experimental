@@ -3,7 +3,7 @@ namespace BenchmarkNetPlayground
 {
     using BenchmarkDotNet.Running;
 
-    using Configs;
+    using Optimizations;
 
     public class Program
     {
@@ -11,13 +11,17 @@ namespace BenchmarkNetPlayground
         {
 
             //Dictionary Benchmarks
-            BenchmarkRunner.Run<Optimizations
-                .DictionaryWithOrWithoutSupplyingInitialCount>(
-                ManualConfigs.GetManualConfig_Net472_CoreRt31_X86());
+            //BenchmarkRunner.Run<Optimizations
+            //    .DictionaryWithOrWithoutSupplyingInitialCount>(
+            //    ManualConfigurations.GetManualConfig_Net472_CoreRt31_X86());
+
+            BenchmarkRunner.Run<IntroNativeMemory>();
 
             //Compiler Inlining Benchmarks
             //BenchmarkRunner.Run<Optimizations.Inlining>();
         }
+
+
 
     }
 }

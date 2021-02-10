@@ -23,7 +23,7 @@ namespace BenchmarkNetPlayground.Configs
             config.AddExporter(DefaultExporters.Html);
             config.AddLogger(ConsoleLogger.Default);
             config.AddColumnProvider(DefaultColumnProviders.Instance);
-            config.AddHardwareCounters(HardwareCounter.BranchMispredictions, HardwareCounter.BranchInstructions, HardwareCounter.TotalCycles);
+            //config.AddHardwareCounters(HardwareCounter.BranchMispredictions, HardwareCounter.BranchInstructions, HardwareCounter.TotalCycles);
             return config;
 
         }
@@ -34,14 +34,14 @@ namespace BenchmarkNetPlayground.Configs
 
             config.AddJob(Job.LegacyJitX86 // Adding first job
                 .WithRuntime(ClrRuntime.Net472) // .NET Framework 4.7.2
-                .WithPlatform(Platform.X86) // Run as x86 application
+                //.WithPlatform(Platform.X86) // Run as x86 application
                 .WithJit(Jit.LegacyJit) // Use LegacyJIT instead of the default RyuJIT
                 .WithGcServer(true)); // Use Server GC
 
 
             config.AddJob(Job.Default // Adding second job
                     .WithRuntime(CoreRtRuntime.CoreRt31)
-                    .WithPlatform(Platform.X86) // Run as x86 application
+                    //.WithPlatform(Platform.X86) // Run as x86 application
                     .WithJit(Jit.RyuJit) // Use LegacyJIT instead of the default RyuJIT
                     .WithGcServer(true) // Use Server GC
 

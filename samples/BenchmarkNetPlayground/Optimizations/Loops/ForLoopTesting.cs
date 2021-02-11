@@ -8,17 +8,29 @@
 
     using System.Collections.Generic;
 
+    using Utils;
+
     public class ForLoopTesting
     {
         public class ForVsForEach
         {
 
             private List<Product> listOfProducts;
-            [GlobalSetup]
+            //private static string[] arrayOfStrings;
+
+            //[GlobalSetup]
+            //public void GlobalSetup()
+            //{
+            //    arrayOfStrings = TestDataRetrievalService.GetCommonWordsTestData();
+
+            //}
+
+            [IterationSetup]
             public void Setup()
             {
-                string[] arrayOfStrings = TestDataRetrievalService.GetCommonWordsTestData();
-                int upperBound = 10000;//arrayOfStrings.Length;
+                var arrayOfStrings = TestDataRetrievalService.GetCommonWordsTestData();
+                RandomizerUtil.Shuffle(arrayOfStrings);
+                int upperBound = arrayOfStrings.Length;
                 listOfProducts = new List<Product>(upperBound);
                 for (int i = 0; i < upperBound; i++)
                 {
@@ -39,7 +51,6 @@
                     var product = listOfProducts[i];
                     dict.Add(product.Name, product);
                 }
-
                 return dict;
             }
 

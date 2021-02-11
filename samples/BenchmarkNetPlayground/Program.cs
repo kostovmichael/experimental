@@ -1,10 +1,9 @@
 ﻿
 namespace BenchmarkNetPlayground
 {
-
     using BenchmarkDotNet.Running;
 
-    using BenchmarkNetPlayground.Configs;
+    using Configs;
 
     using Optimizations.Loops;
 

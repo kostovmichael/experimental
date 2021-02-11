@@ -34,17 +34,42 @@ namespace BenchmarkNetPlayground.Configs
 
             config.AddJob(Job.LegacyJitX86 // Adding first job
                 .WithRuntime(ClrRuntime.Net472) // .NET Framework 4.7.2
-                //.WithPlatform(Platform.X86) // Run as x86 application
+                .WithPlatform(Platform.X86) // Run as x86 application
                 .WithJit(Jit.LegacyJit) // Use LegacyJIT instead of the default RyuJIT
                 .WithGcServer(true)); // Use Server GC
 
 
             config.AddJob(Job.Default // Adding second job
                     .WithRuntime(CoreRtRuntime.CoreRt31)
-                    //.WithPlatform(Platform.X86) // Run as x86 application
+                    .WithPlatform(Platform.X86) // Run as x86 application
                     .WithJit(Jit.RyuJit) // Use LegacyJIT instead of the default RyuJIT
                     .WithGcServer(true) // Use Server GC
 
+            );
+
+            return config;
+
+        }
+
+        public static ManualConfig GetManualConfig_Net472_CoreRt31_64()
+        {
+            ManualConfig config = GetManualConfigDefault();
+
+            config.AddJob(Job.LegacyJitX64 // Adding first job
+                .WithRuntime(ClrRuntime.Net472) // .NET Framework 4.7.2
+                .WithPlatform(Platform.X64) // Run as x86 application
+                .WithJit(Jit.LegacyJit) // Use LegacyJIT instead of the default RyuJIT
+                .WithGcServer(true)// Use Server GC
+                                   //.WithIterationCount(20)// Max Iterations (Default is 50)
+            );
+
+
+            config.AddJob(Job.Default // Adding second job
+                    .WithRuntime(CoreRtRuntime.CoreRt31)
+                    .WithPlatform(Platform.X64) // Run as x86 application
+                    .WithJit(Jit.RyuJit) // Use LegacyJIT instead of the default RyuJIT
+                    .WithGcServer(true)// Use Server GC
+                                       //.WithIterationCount(20)// Max Iterations (Default is 50)
             );
 
             return config;

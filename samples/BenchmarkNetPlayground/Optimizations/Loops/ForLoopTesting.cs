@@ -13,12 +13,12 @@
         public class ForVsForEach
         {
 
-            private static List<Product> listOfProducts;
+            private List<Product> listOfProducts;
             [GlobalSetup]
             public void Setup()
             {
                 string[] arrayOfStrings = TestDataRetrievalService.GetCommonWordsTestData();
-                int upperBound = arrayOfStrings.Length;
+                int upperBound = 10000;//arrayOfStrings.Length;
                 listOfProducts = new List<Product>(upperBound);
                 for (int i = 0; i < upperBound; i++)
                 {
@@ -30,39 +30,39 @@
                 }
             }
             [Benchmark]
-            public Dictionary<int, Product> ForLoop()
+            public Dictionary<string, Product> ForLoop()
             {
                 int upperBound = listOfProducts.Count;
-                Dictionary<int, Product> dict = new Dictionary<int, Product>(upperBound);
+                Dictionary<string, Product> dict = new Dictionary<string, Product>(listOfProducts.Count);
                 for (int i = 0; i < upperBound; i++)
                 {
                     var product = listOfProducts[i];
-                    dict.Add(product.Id, product);
+                    dict.Add(product.Name, product);
                 }
 
                 return dict;
             }
 
             [Benchmark]
-            public Dictionary<int, Product> ForEach()
+            public Dictionary<string, Product> ForEach()
             {
 
-                Dictionary<int, Product> dict = new Dictionary<int, Product>(listOfProducts.Count);
+                Dictionary<string, Product> dict = new Dictionary<string, Product>(listOfProducts.Count);
                 foreach (var product in listOfProducts)
                 {
-                    dict.Add(product.Id, product);
+                    dict.Add(product.Name, product);
                 }
                 return dict;
             }
 
 
             [Benchmark]
-            public Dictionary<int, Product> ForEachWithLambda()
+            public Dictionary<string, Product> ForEachWithLambda()
             {
-                Dictionary<int, Product> dict = new Dictionary<int, Product>(listOfProducts.Count);
+                Dictionary<string, Product> dict = new Dictionary<string, Product>(listOfProducts.Count);
                 listOfProducts.ForEach(product =>
                 {
-                    dict.Add(product.Id, product);
+                    dict.Add(product.Name, product);
                 });
 
                 return dict;

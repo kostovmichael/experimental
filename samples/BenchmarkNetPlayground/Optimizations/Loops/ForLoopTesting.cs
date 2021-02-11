@@ -6,7 +6,6 @@
 
     using Services;
 
-    using System;
     using System.Collections.Generic;
 
     public class ForLoopTesting
@@ -19,7 +18,7 @@
             public void Setup()
             {
                 string[] arrayOfStrings = TestDataRetrievalService.GetCommonWordsTestData();
-                int upperBound = arrayOfStrings.Length;
+                int upperBound = 10000;//arrayOfStrings.Length;
                 listOfProducts = new List<Product>(upperBound);
                 for (int i = 0; i < upperBound; i++)
                 {
@@ -37,9 +36,8 @@
                 int upperBound = listOfProducts.Count;
                 for (int i = 0; i < upperBound; i++)
                 {
-                    counter++;
                     var product = listOfProducts[i];
-                    Console.WriteLine(product.Id);
+                    counter = counter + product.Id;
                 }
 
                 return counter;
@@ -51,8 +49,7 @@
                 int counter = 0;
                 foreach (var product in listOfProducts)
                 {
-                    counter++;
-                    Console.WriteLine(product.Id);
+                    counter = counter + product.Id;
                 }
                 return counter;
             }
@@ -62,10 +59,9 @@
             public int ForEachWithLambda()
             {
                 int counter = 0;
-                listOfProducts.ForEach(x =>
+                listOfProducts.ForEach(product =>
                 {
-                    counter++;
-                    Console.WriteLine(x.Id);
+                    counter = counter + product.Id;
                 });
 
                 return counter;

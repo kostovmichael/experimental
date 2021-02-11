@@ -18,7 +18,7 @@
             public void Setup()
             {
                 string[] arrayOfStrings = TestDataRetrievalService.GetCommonWordsTestData();
-                int upperBound = 10000;//arrayOfStrings.Length;
+                int upperBound = arrayOfStrings.Length;
                 listOfProducts = new List<Product>(upperBound);
                 for (int i = 0; i < upperBound; i++)
                 {
@@ -30,41 +30,42 @@
                 }
             }
             [Benchmark]
-            public int ForLoop()
+            public Dictionary<int, Product> ForLoop()
             {
-                int counter = 0;
                 int upperBound = listOfProducts.Count;
+                Dictionary<int, Product> dict = new Dictionary<int, Product>(upperBound);
                 for (int i = 0; i < upperBound; i++)
                 {
                     var product = listOfProducts[i];
-                    counter = counter + product.Id;
+                    dict.Add(product.Id, product);
                 }
 
-                return counter;
+                return dict;
             }
 
             [Benchmark]
-            public int ForEach()
+            public Dictionary<int, Product> ForEach()
             {
-                int counter = 0;
+
+                Dictionary<int, Product> dict = new Dictionary<int, Product>(listOfProducts.Count);
                 foreach (var product in listOfProducts)
                 {
-                    counter = counter + product.Id;
+                    dict.Add(product.Id, product);
                 }
-                return counter;
+                return dict;
             }
 
 
             [Benchmark]
-            public int ForEachWithLambda()
+            public Dictionary<int, Product> ForEachWithLambda()
             {
-                int counter = 0;
+                Dictionary<int, Product> dict = new Dictionary<int, Product>(listOfProducts.Count);
                 listOfProducts.ForEach(product =>
                 {
-                    counter = counter + product.Id;
+                    dict.Add(product.Id, product);
                 });
 
-                return counter;
+                return dict;
             }
 
 

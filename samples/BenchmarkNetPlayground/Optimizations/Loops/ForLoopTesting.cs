@@ -14,12 +14,11 @@
     public class ForLoopTesting
     {
 
-        [SimpleJob(RuntimeMoniker.CoreRt31)]
-
-        //https://benchmarkdotnet.org/articles/configs/diagnosers.html
-        [MemoryDiagnoser]
-        [ArtifactsPath(@"C:\ProgAppLogs")]
-        [HtmlExporter]
+        //[SimpleJob(RuntimeMoniker.Net472)]
+        ////https://benchmarkdotnet.org/articles/configs/diagnosers.html
+        //[MemoryDiagnoser]
+        ////[ArtifactsPath(@"C:\ProgAppLogs")]
+        //[HtmlExporter]
         public class ForVsForEach
         {
 
@@ -29,7 +28,7 @@
             [GlobalSetup]
             public void GlobalSetup()
             {
-                arrayOfStrings = TestDataRetrievalService.GetCommonWordsTestData();
+                arrayOfStrings = TestDataRetrievalService.GetMThesaurStringArray();
                 int upperBound = arrayOfStrings.Length;
                 listOfProducts = new List<Product>(upperBound);
                 for (int i = 0; i < upperBound; i++)
@@ -43,55 +42,39 @@
 
             }
 
-            //[IterationSetup]
-            //public void Setup()
-            //{
-            //    //var arrayOfStrings = TestDataRetrievalService.GetCommonWordsTestData();
-            //    RandomizerUtil.Shuffle(arrayOfStrings);
-            //    int upperBound = arrayOfStrings.Length;
-            //    listOfProducts = new List<Product>(upperBound);
-            //    for (int i = 0; i < upperBound; i++)
-            //    {
-            //        listOfProducts.Add(new Product()
-            //        {
-            //            Id = i + 100,
-            //            Name = arrayOfStrings[i]
-            //        });
-            //    }
-            //}
             [Benchmark]
-            public Dictionary<string, Product> ForLoop()
+            public Dictionary<int, Product> ForLoop()
             {
                 int upperBound = listOfProducts.Count;
-                Dictionary<string, Product> dict = new Dictionary<string, Product>(listOfProducts.Count);
+                var dict = new Dictionary<int, Product>(listOfProducts.Count);
                 for (int i = 0; i < upperBound; i++)
                 {
                     var product = listOfProducts[i];
-                    dict.Add(product.Name, product);
+                    dict.Add(product.Id, product);
                 }
                 return dict;
             }
 
             [Benchmark]
-            public Dictionary<string, Product> ForEach()
+            public Dictionary<int, Product> ForEach()
             {
 
-                Dictionary<string, Product> dict = new Dictionary<string, Product>(listOfProducts.Count);
-                foreach (var product in listOfProducts)
+            var dict = new Dictionary<int, Product>(listOfProducts.Count);
+            foreach (var product in listOfProducts)
                 {
-                    dict.Add(product.Name, product);
+                    dict.Add(product.Id, product);
                 }
                 return dict;
             }
 
 
             [Benchmark]
-            public Dictionary<string, Product> ForEachWithLambda()
+            public Dictionary<int, Product> ForEachWithLambda()
             {
-                Dictionary<string, Product> dict = new Dictionary<string, Product>(listOfProducts.Count);
-                listOfProducts.ForEach(product =>
+            var dict = new Dictionary<int, Product>(listOfProducts.Count);
+            listOfProducts.ForEach(product =>
                 {
-                    dict.Add(product.Name, product);
+                    dict.Add(product.Id, product);
                 });
 
                 return dict;

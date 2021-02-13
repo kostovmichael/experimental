@@ -24,10 +24,15 @@ namespace BenchmarkNetPlayground.Services
 
         public static string[] GetCommonWordsTestData()
         {
-            return GetTestDataStringArrayFromFile("CommonWords.txt", newLineSeparator);
+            return GetTestDataStringArrayFromFile("commonWords.txt", newLineSeparator);
+        }
+        public static string[] GetMThesaurStringArray()
+        {
+           return GetTestDataStringArrayFromFile("mthesaur.txt",new char[] { ',' });
         }
 
-        public static string[] GetTestDataStringArrayFromFile(string fileName, char[] separator)
+
+      public static string[] GetTestDataStringArrayFromFile(string fileName, char[] separator)
         {
             string fileFullPath = Path.Combine(GetAppDataDirectoryPath(), fileName);
             string fileRawText = System.IO.File.ReadAllText(fileFullPath);

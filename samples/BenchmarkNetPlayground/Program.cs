@@ -3,10 +3,11 @@ namespace BenchmarkNetPlayground
 {
     using BenchmarkDotNet.Running;
 
-   using BenchmarkNetPlayground.Services;
+    using BenchmarkNetPlayground.Services;
 
-   using Configs;
+    using Configs;
 
+    using Optimizations;
     using Optimizations.Loops;
 
     using System;
@@ -17,33 +18,30 @@ namespace BenchmarkNetPlayground
         {
 
 
-         #region "For loops"
-         BenchmarkRunner.Run<ForLoopTesting.ForVsForEach>(ManualConfigurations.GetManualConfig_Net472_CoreRt31_64());
+            #region "For loops"
 
-         #endregion "For loops"
+            //BenchmarkRunner.Run<ForLoopTesting.ForVsForEach>(ManualConfigurations.GetManualConfig_Net472_CoreRt31_64());
 
-
-         #region "Dictionary Benchmarks"
-
-         // Dictionary Benchmarks
+            #endregion "For loops"
 
 
-         //BenchmarkRunner.Run<DictionaryConcreteVsInterface>(
-         //  ManualConfigurations.GetManualConfig_Net472_CoreRt31_64());
+            #region "Dictionary Benchmarks"
 
-         //BenchmarkRunner.Run<Optimizations
-         //    .DictionaryWithOrWithoutSupplyingInitialCount>(
-         //    ManualConfigurations.GetManualConfig_Net472_CoreRt31_X86());
+            BenchmarkRunner.Run<DictionaryConcreteVsInterface>(
+              ManualConfigurations.GetManualConfig_Net472_CoreRt31_64());
+
+            //BenchmarkRunner.Run<Optimizations.DictionaryWithOrWithoutSupplyingInitialCount>(
+            //    ManualConfigurations.GetManualConfig_Net472_CoreRt31_64());
 
 
-         #endregion "Dictionary Benchmarks"
+            #endregion "Dictionary Benchmarks"
 
-         // Memory Benchmarks
-         //BenchmarkRunner.Run<IntroNativeMemory>();
+            // Memory Benchmarks
+            //BenchmarkRunner.Run<IntroNativeMemory>();
 
-         // Compiler Inlining Benchmarks
-         //BenchmarkRunner.Run<Optimizations.Inlining>();
-      }
+            // Compiler Inlining Benchmarks
+            //BenchmarkRunner.Run<Optimizations.Inlining>();
+        }
 
 
 

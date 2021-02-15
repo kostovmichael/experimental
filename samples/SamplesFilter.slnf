@@ -1,0 +1,12 @@
+{
+  "solution": {
+    "path": "Samples.sln",
+    "projects": [
+      "BenchmarkNetPlayground\\BenchmarkNetPlayground.csproj",
+      "MvcAndWebApiDotNetLegacy\\MvcAndWebApiDotNetLegacy.csproj",
+      "MvcAndWebApiDotNetThree\\MvcAndWebApiDotNetThree.csproj",
+      "PerformanceConcepts\\PatternsAndConcepts.csproj",
+      "web\\MvcSample\\MvcAndWebApiDotNetFive.csproj"
+    ]
+  }
+}

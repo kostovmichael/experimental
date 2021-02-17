@@ -16,6 +16,7 @@
 		<PackageReference Include="BenchmarkDotNet" Version="0.12.1" />
 		<PackageReference Include="BenchmarkDotNet.Annotations" Version="0.12.1" />
 		<PackageReference Include="BenchmarkDotNet.Diagnostics.Windows" Version="0.12.1" />
+		<PackageReference Include="Microsoft.Extensions.Primitives" Version="5.0.0" />
 	</ItemGroup>
 
 </Project>

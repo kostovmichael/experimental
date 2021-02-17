@@ -7,8 +7,12 @@ namespace BenchmarkNetPlayground
 
     using Configs;
 
+    using Microsoft.Extensions.Primitives;
+
     using Optimizations;
     using Optimizations.Loops;
+
+    using ScratchPad;
 
     using System;
 
@@ -27,8 +31,8 @@ namespace BenchmarkNetPlayground
 
             #region "Dictionary Benchmarks"
 
-            BenchmarkRunner.Run<DictionaryConcreteVsInterface>(
-              ManualConfigurations.GetManualConfig_Net472_CoreRt31_64());
+            //BenchmarkRunner.Run<DictionaryConcreteVsInterface>(
+            //  ManualConfigurations.GetManualConfig_Net472_CoreRt31_64());
 
             //BenchmarkRunner.Run<Optimizations.DictionaryWithOrWithoutSupplyingInitialCount>(
             //    ManualConfigurations.GetManualConfig_Net472_CoreRt31_64());
@@ -42,8 +46,6 @@ namespace BenchmarkNetPlayground
             // Compiler Inlining Benchmarks
             //BenchmarkRunner.Run<Optimizations.Inlining>();
         }
-
-
 
     }
 }

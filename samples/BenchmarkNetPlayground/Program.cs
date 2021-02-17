@@ -1,51 +1,52 @@
 ﻿
 namespace BenchmarkNetPlayground
 {
-    using BenchmarkDotNet.Running;
+   using BenchmarkDotNet.Running;
 
-    using BenchmarkNetPlayground.Services;
+   using BenchmarkNetPlayground.Services;
 
-    using Configs;
+   using Configs;
 
-    using Microsoft.Extensions.Primitives;
+   using Microsoft.Extensions.Primitives;
 
-    using Optimizations;
-    using Optimizations.Loops;
+   using Optimizations;
+   using Optimizations.Loops;
 
-    using ScratchPad;
+   using ScratchPad;
 
-    using System;
+   using System;
 
-    public class Program
-    {
-        static void Main(string[] args)
-        {
+   public class Program
+   {
+      static void Main(string[] args)
+      {
 
+         BenchmarkRunner.Run<RefAllocation>();
 
-            #region "For loops"
+         #region "For loops"
 
-            //BenchmarkRunner.Run<ForLoopTesting.ForVsForEach>(ManualConfigurations.GetManualConfig_Net472_CoreRt31_64());
+         //BenchmarkRunner.Run<ForLoopTesting.ForVsForEach>(ManualConfigurations.GetManualConfig_Net472_CoreRt31_64());
 
-            #endregion "For loops"
-
-
-            #region "Dictionary Benchmarks"
-
-            //BenchmarkRunner.Run<DictionaryConcreteVsInterface>(
-            //  ManualConfigurations.GetManualConfig_Net472_CoreRt31_64());
-
-            //BenchmarkRunner.Run<Optimizations.DictionaryWithOrWithoutSupplyingInitialCount>(
-            //    ManualConfigurations.GetManualConfig_Net472_CoreRt31_64());
+         #endregion "For loops"
 
 
-            #endregion "Dictionary Benchmarks"
+         #region "Dictionary Benchmarks"
 
-            // Memory Benchmarks
-            //BenchmarkRunner.Run<IntroNativeMemory>();
+         //BenchmarkRunner.Run<DictionaryConcreteVsInterface>(
+         //  ManualConfigurations.GetManualConfig_Net472_CoreRt31_64());
 
-            // Compiler Inlining Benchmarks
-            //BenchmarkRunner.Run<Optimizations.Inlining>();
-        }
+         //BenchmarkRunner.Run<Optimizations.DictionaryWithOrWithoutSupplyingInitialCount>(
+         //    ManualConfigurations.GetManualConfig_Net472_CoreRt31_64());
 
-    }
+
+         #endregion "Dictionary Benchmarks"
+
+         // Memory Benchmarks
+         //BenchmarkRunner.Run<IntroNativeMemory>();
+
+         // Compiler Inlining Benchmarks
+         //BenchmarkRunner.Run<Optimizations.Inlining>();
+      }
+
+   }
 }

@@ -19,4 +19,10 @@
 		<PackageReference Include="Microsoft.Extensions.Primitives" Version="5.0.0" />
 	</ItemGroup>
 
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net472' ">
+		<PackageReference Include="System.Memory" Version="4.5.4" />
+		<PackageReference Include="System.Text.Json" Version="4.7.2" />
+		<Reference Include="System.Net.Http" />
+	</ItemGroup>
+
 </Project>

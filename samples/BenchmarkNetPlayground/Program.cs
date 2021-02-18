@@ -1,52 +1,71 @@
 ﻿
 namespace BenchmarkNetPlayground
 {
-   using BenchmarkDotNet.Running;
+    using BenchmarkDotNet.Running;
 
-   using BenchmarkNetPlayground.Services;
+    using BenchmarkNetPlayground.Services;
 
-   using Configs;
+    using Configs;
 
-   using Microsoft.Extensions.Primitives;
+    using Microsoft.Extensions.Primitives;
 
-   using Optimizations;
-   using Optimizations.Loops;
+    using Optimizations;
+    using Optimizations.Loops;
 
-   using ScratchPad;
+    using ScratchPad;
 
-   using System;
+    using System;
 
-   public class Program
-   {
-      static void Main(string[] args)
-      {
-
-         BenchmarkRunner.Run<RefAllocation>();
-
-         #region "For loops"
-
-         //BenchmarkRunner.Run<ForLoopTesting.ForVsForEach>(ManualConfigurations.GetManualConfig_Net472_CoreRt31_64());
-
-         #endregion "For loops"
+    public class Program
+    {
+        static void Main(string[] args)
+        {
 
 
-         #region "Dictionary Benchmarks"
-
-         //BenchmarkRunner.Run<DictionaryConcreteVsInterface>(
-         //  ManualConfigurations.GetManualConfig_Net472_CoreRt31_64());
-
-         //BenchmarkRunner.Run<Optimizations.DictionaryWithOrWithoutSupplyingInitialCount>(
-         //    ManualConfigurations.GetManualConfig_Net472_CoreRt31_64());
 
 
-         #endregion "Dictionary Benchmarks"
+            #region "Sorting"
 
-         // Memory Benchmarks
-         //BenchmarkRunner.Run<IntroNativeMemory>();
+            BenchmarkRunner.Run<SortingArraysUsingSpans.DoubleSorting>(ManualConfigurations.GetManualConfig_Net472_CoreRt31_DotNet50_64());
+            BenchmarkRunner.Run<SortingArraysUsingSpans.Int32Sorting>(ManualConfigurations.GetManualConfig_Net472_CoreRt31_DotNet50_64());
+            BenchmarkRunner.Run<SortingArraysUsingSpans.StringSorting>(ManualConfigurations.GetManualConfig_Net472_CoreRt31_DotNet50_64());
 
-         // Compiler Inlining Benchmarks
-         //BenchmarkRunner.Run<Optimizations.Inlining>();
-      }
+            #endregion "Sorting"
 
-   }
+
+            #region "Value vs Ref Types"
+
+            //BenchmarkRunner.Run<RefAllocation>();
+
+            #endregion "Value vs Ref Types"
+
+
+
+            #region "For loops"
+
+            //BenchmarkRunner.Run<ForLoopTesting.ForVsForEach>(ManualConfigurations.GetManualConfig_Net472_CoreRt31_64());
+
+            #endregion "For loops"
+
+
+            #region "Dictionary Benchmarks"
+
+            //BenchmarkRunner.Run<DictionaryConcreteVsInterface>(
+            //  ManualConfigurations.GetManualConfig_Net472_CoreRt31_64());
+
+            //BenchmarkRunner.Run<Optimizations.DictionaryWithOrWithoutSupplyingInitialCount>(
+            //    ManualConfigurations.GetManualConfig_Net472_CoreRt31_64());
+
+
+            #endregion "Dictionary Benchmarks"
+
+            // Memory Benchmarks
+            //BenchmarkRunner.Run<IntroNativeMemory>();
+
+            // Compiler Inlining Benchmarks
+            //BenchmarkRunner.Run<Optimizations.Inlining>();
+
+        }
+
+    }
 }

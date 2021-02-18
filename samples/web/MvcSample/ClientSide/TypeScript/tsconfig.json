@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "outDir": "../../wwwroot/dist/compiledScripts/",
+    "noImplicitAny": true,
+    "noEmitOnError": true,
+    "sourceMap": false,
+    "target": "es2015"
+  },
+  
+    "compileOnSave": true
+  }

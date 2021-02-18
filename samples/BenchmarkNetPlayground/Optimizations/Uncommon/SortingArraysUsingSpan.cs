@@ -1,4 +1,4 @@
-﻿namespace BenchmarkNetPlayground.Optimizations
+﻿namespace BenchmarkNetPlayground.Optimizations.Uncommon
 {
     using BenchmarkDotNet.Attributes;
 
@@ -7,10 +7,16 @@
     /// <summary>
     /// ref https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-5/#gc
     /// </summary>
-    public class SortingArraysUsingSpans
+    public class SortingArraysUsingSpan
     {
-        public class DoubleSorting : Sorting<double> { protected override double GetNext() => _random.Next(); }
-        public class Int32Sorting : Sorting<int> { protected override int GetNext() => _random.Next(); }
+        public class DoubleSorting : Sorting<double>
+        {
+           protected override double GetNext() => _random.Next();
+        }
+        public class Int32Sorting : Sorting<int>
+        {
+           protected override int GetNext() => _random.Next();
+        }
         public class StringSorting : Sorting<string>
         {
             protected override string GetNext()

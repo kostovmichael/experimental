@@ -22,7 +22,7 @@ namespace BenchmarkNetPlayground.Configs
             config.WithArtifactsPath(ArtifactsPath);
             config.AddExporter(DefaultExporters.Html);
             config.AddLogger(ConsoleLogger.Default);
-            config.AddColumnProvider(DefaultColumnProviders.Instance, );
+            config.AddColumnProvider(DefaultColumnProviders.Instance);
 
             //config.AddHardwareCounters(HardwareCounter.BranchMispredictions, HardwareCounter.BranchInstructions, HardwareCounter.TotalCycles);
             return config;
@@ -50,7 +50,6 @@ namespace BenchmarkNetPlayground.Configs
         {
             ManualConfig config = GetManualConfigDefault();
             config.AddJob(Get_Job_DotNet_Legacy_472(), Get_Job_DotNet_Core_31(), Get_Job_DotNet_50());
-            config.
             return config;
         }
 

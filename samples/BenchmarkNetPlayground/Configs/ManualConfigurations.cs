@@ -14,6 +14,7 @@ namespace BenchmarkNetPlayground.Configs
    {
       public const string ArtifactsPath = @"C:\ProgAppLogs\BenchmarkDotNet";
 
+      #region "Manual Configs"
       public static ManualConfig GetManualConfigDefault()
       {
          ManualConfig config = ManualConfig.CreateEmpty();
@@ -27,9 +28,16 @@ namespace BenchmarkNetPlayground.Configs
          return config;
 
       }
+      public static ManualConfig GetManualConfig_Default_Job()
+      {
+         ManualConfig config = GetManualConfigDefault();
+         config.AddJob(Job.Default.WithGcServer(true));
+         return config;
+
+      }
 
 
-      #region "Manual Configs"
+
 
       public static ManualConfig GetManualConfig_Net472_CoreRt31_X86()
       {
@@ -49,7 +57,7 @@ namespace BenchmarkNetPlayground.Configs
       public static ManualConfig GetManualConfig_Net472_CoreRt31_DotNet50_64()
       {
          ManualConfig config = GetManualConfigDefault();
-         config.AddJob(Get_Job_DotNet_Legacy_472().AsBaseline());
+         config.AddJob(Get_Job_DotNet_Legacy_472());
          config.AddJob(Get_Job_DotNet_Core_31());
          config.AddJob(Get_Job_DotNet_50());
          return config;
@@ -70,7 +78,7 @@ namespace BenchmarkNetPlayground.Configs
          );
 
          config.AddJob(Job.ShortRun
-            .WithRuntime(CoreRuntime.Core31)
+            .WithRuntime(CoreRtRuntime.CoreRt31)
             .WithPlatform(Platform.X64)
             .WithJit(Jit.RyuJit)
             .WithGcServer(true)
@@ -79,8 +87,8 @@ namespace BenchmarkNetPlayground.Configs
          );
 
          config.AddJob(Job.ShortRun
+               .WithRuntime(CoreRtRuntime.CoreRt50)
                .WithPlatform(Platform.X64)
-               .WithRuntime(CoreRuntime.Core50)
                .WithJit(Jit.RyuJit)
                .WithGcServer(true)
                .WithId("CoreRt50")

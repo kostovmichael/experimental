@@ -35,7 +35,7 @@ namespace BenchmarkNetPlayground
 
             #region "For loops"
 
-            BenchmarkRunner.Run<ForLoopTesting.ForVsForEach>(ManualConfigurations.GetManualConfig_Net472_CoreRt31_DotNet50_64());
+            BenchmarkRunner.Run<ForLoopTesting.ForVsForEach>(ManualConfigurations.GetManualConfig_Net472_CoreRt31_DotNet50_64_backup());
 
             #endregion "For loops"
 

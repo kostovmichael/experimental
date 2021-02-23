@@ -14,7 +14,7 @@
     //[HtmlExporter]
     public class DictionaryWithOrWithoutSupplyingInitialCount
     {
-        private static string[] arrayOfStrings;
+        private string[] arrayOfStrings;
         [GlobalSetup]
         public void Setup()
         {

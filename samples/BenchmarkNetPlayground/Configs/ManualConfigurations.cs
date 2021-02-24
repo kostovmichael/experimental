@@ -24,7 +24,6 @@ namespace BenchmarkNetPlayground.Configs
          config.AddExporter(DefaultExporters.Html);
          config.AddLogger(ConsoleLogger.Default);
          config.AddColumnProvider(DefaultColumnProviders.Instance);
-         //config.AddHardwareCounters(HardwareCounter.BranchMispredictions, HardwareCounter.BranchInstructions, HardwareCounter.TotalCycles);
          return config;
 
       }
@@ -69,12 +68,12 @@ namespace BenchmarkNetPlayground.Configs
          config.AddJob(Job.ShortRun
                .WithRuntime(ClrRuntime.Net472)
                .WithPlatform(Platform.X64)
-               .WithJit(Jit.LegacyJit)
+               .WithJit(Jit.RyuJit)
                .WithGcServer(true)
                //.WithBaseline(true)
                //.AsBaseline()
                .WithId("Net472")
-               
+
          );
 
          config.AddJob(Job.ShortRun
@@ -86,14 +85,14 @@ namespace BenchmarkNetPlayground.Configs
 
          );
 
-         config.AddJob(Job.ShortRun
-               .WithRuntime(CoreRtRuntime.CoreRt50)
-               .WithPlatform(Platform.X64)
-               .WithJit(Jit.RyuJit)
-               .WithGcServer(true)
-               .WithId("CoreRt50")
-         //.WithMaxIterationCount(maxIterationsCount)// Max Iterations (Default is 100)
-         );
+         //config.AddJob(Job.ShortRun
+         //      .WithRuntime(CoreRuntime.Core50)
+         //      .WithPlatform(Platform.X64)
+         //      .WithJit(Jit.RyuJit)
+         //      .WithGcServer(true)
+         //      .WithId("CoreRt50")
+         ////.WithMaxIterationCount(maxIterationsCount)// Max Iterations (Default is 100)
+         //);
 
          return config;
 

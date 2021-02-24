@@ -35,8 +35,8 @@ namespace BenchmarkNetPlayground
 
          #region "For loops"
 
-         //BenchmarkRunner.Run<ForLoopTesting.ForVsForEach>
-         //   (ManualConfigurations.GetManualConfig_Net472_CoreRt31_DotNet50_64_backup());
+         BenchmarkRunner.Run<ForLoopTesting.ForVsForEachSlim>
+            (ManualConfigurations.GetManualConfig_Net472_CoreRt31_DotNet50_64_backup());
 
          #endregion "For loops"
 
@@ -46,8 +46,8 @@ namespace BenchmarkNetPlayground
          //BenchmarkRunner.Run<DictionaryConcreteVsInterface>(
          //  ManualConfigurations.GetManualConfig_Net472_CoreRt31_64());
 
-         BenchmarkRunner.Run<Optimizations.DictionaryWithOrWithoutSupplyingInitialCount>(
-             ManualConfigurations.GetManualConfig_Net472_CoreRt31_DotNet50_64_backup());
+         //BenchmarkRunner.Run<Optimizations.DictionaryWithOrWithoutSupplyingInitialCount>(
+         //    ManualConfigurations.GetManualConfig_Net472_CoreRt31_DotNet50_64_backup());
 
 
          #endregion "Dictionary Benchmarks"

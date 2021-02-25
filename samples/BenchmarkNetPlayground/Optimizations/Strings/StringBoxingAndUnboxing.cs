@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 namespace BenchmarkNetPlayground.Optimizations.Strings
 {
     public class StringBoxingAndUnboxing
-    {
+    { 
     }
 }

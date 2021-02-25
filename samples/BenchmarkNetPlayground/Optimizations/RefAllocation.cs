@@ -23,7 +23,6 @@
                         .WithJit(Jit.RyuJit)
 
                 );
-                //this.AddHardwareCounters(HardwareCounter.InstructionRetired);
             }
         }
 

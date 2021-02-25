@@ -24,21 +24,28 @@ namespace BenchmarkNetPlayground
 
 
 
-            //BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
+         //BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
 
 
-            #region "Value vs Ref Types"
+         #region "String Search"
 
-            //BenchmarkRunner.Run<RefAllocation>();
+         BenchmarkRunner.Run<Optimizations.Strings.StringSearch.TrieVsDictionary>
+         (ManualConfigurations.GetManualConfig_Default_Job());
 
-            #endregion "Value vs Ref Types"
+         #endregion "String Search"
+
+         #region "Value vs Ref Types"
+
+         //BenchmarkRunner.Run<RefAllocation>();
+
+         #endregion "Value vs Ref Types"
 
 
 
-            #region "For loops"
+         #region "For loops"
 
-            BenchmarkRunner.Run<Optimizations.Loops.ForLoopTesting.ForVsForEach>();
-            //(ManualConfigurations.GetManualConfig_Default_Job());
+         //BenchmarkRunner.Run<Optimizations.Loops.ForLoopTesting.ForVsForEach>
+         //   (ManualConfigurations.GetManualConfig_Default_Job());
 
             #endregion "For loops"
 

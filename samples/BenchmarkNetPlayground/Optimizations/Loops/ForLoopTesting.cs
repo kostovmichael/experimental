@@ -23,29 +23,29 @@
 
     public class ForLoopTesting
     {
-        [Config(typeof(Config))]
+        //[Config(typeof(Config))]
         public class ForVsForEach
         {
-            private class Config : ManualConfig
-            {
-                public Config()
-                {
-                    // The same, using the .With() factory methods:
-                    AddJob(
-                        Job.ShortRun
-                            .WithPlatform(Platform.X64)
-                            .WithJit(Jit.RyuJit)
-                            .WithRuntime(CoreRuntime.Core50)
-                            .WithMaxRelativeError(0.01)
-                            .WithId("Core50Job")
-                    );
-                    AddDiagnoser(MemoryDiagnoser.Default);
-                    // Exporters for data
-                    AddExporter(GetExporters().ToArray());
-                    AddColumn(StatisticColumn.AllStatistics);
+            //private class Config : ManualConfig
+            //{
+            //    public Config()
+            //    {
+            //        // The same, using the .With() factory methods:
+            //        AddJob(
+            //            Job.ShortRun
+            //                .WithPlatform(Platform.X64)
+            //                .WithJit(Jit.RyuJit)
+            //                .WithRuntime(CoreRuntime.Core50)
+            //                .WithMaxRelativeError(0.01)
+            //                .WithId("Core50Job")
+            //        );
+            //        AddDiagnoser(MemoryDiagnoser.Default);
+            //        // Exporters for data
+            //        AddExporter(GetExporters().ToArray());
+            //        AddColumn(StatisticColumn.AllStatistics);
 
-                }
-            }
+            //    }
+            //}
 
             private List<Product> listOfProducts;
             private string[] arrayOfStrings;
@@ -174,7 +174,7 @@
 
         }
 
-    }
+   }
 
 
 }

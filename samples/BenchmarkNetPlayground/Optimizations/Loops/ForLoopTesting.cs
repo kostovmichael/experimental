@@ -1,27 +1,14 @@
 ﻿namespace BenchmarkNetPlayground.Optimizations.Loops
 {
-    using BenchmarkDotNet.Analysers;
     using BenchmarkDotNet.Attributes;
-    using BenchmarkDotNet.Columns;
-    using BenchmarkDotNet.Configs;
-    using BenchmarkDotNet.Diagnosers;
-    using BenchmarkDotNet.Environments;
-    using BenchmarkDotNet.Exporters;
-    using BenchmarkDotNet.Jobs;
-    using BenchmarkDotNet.Validators;
 
-    using DummyClasses;
-
-    using Perfolizer.Horology;
+    using PatternsAndConcepts.DummyModels;
 
     using Services;
 
     using System.Collections.Generic;
-    using System.Linq;
 
-    using Utils;
-
-    public class ForLoopTesting
+    public class ForLoops
     {
         //[Config(typeof(Config))]
         public class ForVsForEach
@@ -109,10 +96,9 @@
 
         }
 
-        public class ForVsForEachSlim
+        public class ForVsForEachUsingStructLayoutSequential
         {
-
-            private List<Product> listOfProducts;
+            private List<ProductStructLayoutSequential> listOfProducts;
             private string[] arrayOfStrings;
 
             [GlobalSetup]
@@ -120,9 +106,82 @@
             {
                 arrayOfStrings = TestDataRetrievalService.GetMThesaurStringArray();
                 int upperBound = arrayOfStrings.Length;
+                listOfProducts = new List<ProductStructLayoutSequential>(upperBound);
+                for (int i = 0; i < upperBound; i++)
+                {
+                    listOfProducts.Add(new ProductStructLayoutSequential()
+                    {
+                        Id = i + 100,
+                        Name = arrayOfStrings[i]
+                    });
+                }
+
+            }
+
+            [Benchmark]
+            public Dictionary<int, ProductStructLayoutSequential> ForLoop()
+            {
+                int upperBound = listOfProducts.Count;
+                var dict = new Dictionary<int, ProductStructLayoutSequential>(listOfProducts.Count);
+                for (int i = 0; i < upperBound; i++)
+                {
+                    var product = listOfProducts[i];
+                    dict.Add(product.Id, product);
+                }
+                return dict;
+            }
+
+            [Benchmark]
+            public Dictionary<int, ProductStructLayoutSequential> ForEach()
+            {
+
+                var dict = new Dictionary<int, ProductStructLayoutSequential>(listOfProducts.Count);
+                foreach (var product in listOfProducts)
+                {
+                    dict.Add(product.Id, product);
+                }
+                return dict;
+            }
+
+
+            [Benchmark]
+            public Dictionary<int, ProductStructLayoutSequential> ForEachWithLambda()
+            {
+                var dict = new Dictionary<int, ProductStructLayoutSequential>(listOfProducts.Count);
+                listOfProducts.ForEach(product =>
+                {
+                    dict.Add(product.Id, product);
+                });
+
+                return dict;
+            }
+
+
+
+        }
+
+
+        public class ForVsForEachClassVsSequentialStruct
+        {
+            private List<ProductStructLayoutSequential> listOfProductStructs;
+            private List<Product> listOfProducts;
+
+            private string[] arrayOfStrings;
+
+            [GlobalSetup]
+            public void GlobalSetup()
+            {
+                arrayOfStrings = TestDataRetrievalService.GetMThesaurStringArray();
+                int upperBound = arrayOfStrings.Length;
+                listOfProductStructs = new List<ProductStructLayoutSequential>(upperBound);
                 listOfProducts = new List<Product>(upperBound);
                 for (int i = 0; i < upperBound; i++)
                 {
+                    listOfProductStructs.Add(new ProductStructLayoutSequential()
+                    {
+                        Id = i + 100,
+                        Name = arrayOfStrings[i]
+                    });
                     listOfProducts.Add(new Product()
                     {
                         Id = i + 100,
@@ -133,48 +192,86 @@
             }
 
             [Benchmark]
-            public long ForLoop()
+            public Dictionary<int, ProductStructLayoutSequential> ForLoop_Struct()
             {
-                long result = 0;
+                int upperBound = listOfProductStructs.Count;
+                var dict = new Dictionary<int, ProductStructLayoutSequential>(listOfProductStructs.Count);
+                for (int i = 0; i < upperBound; i++)
+                {
+                    var product = listOfProductStructs[i];
+                    dict.Add(product.Id, product);
+                }
+                return dict;
+            }
+
+            [Benchmark]
+            public Dictionary<int, ProductStructLayoutSequential> ForEach_Struct()
+            {
+
+                var dict = new Dictionary<int, ProductStructLayoutSequential>(listOfProductStructs.Count);
+                foreach (var product in listOfProductStructs)
+                {
+                    dict.Add(product.Id, product);
+                }
+                return dict;
+            }
+
+
+            [Benchmark]
+            public Dictionary<int, ProductStructLayoutSequential> ForEachWithLambda_Struct()
+            {
+                var dict = new Dictionary<int, ProductStructLayoutSequential>(listOfProductStructs.Count);
+                listOfProductStructs.ForEach(product =>
+                {
+                    dict.Add(product.Id, product);
+                });
+
+                return dict;
+            }
+
+            [Benchmark]
+            public Dictionary<int, Product> ForLoop_Class()
+            {
                 int upperBound = listOfProducts.Count;
+                var dict = new Dictionary<int, Product>(listOfProducts.Count);
                 for (int i = 0; i < upperBound; i++)
                 {
                     var product = listOfProducts[i];
-                    result += product.Id;
+                    dict.Add(product.Id, product);
                 }
-                return result;
+                return dict;
             }
 
             [Benchmark]
-            public long ForEach()
+            public Dictionary<int, Product> ForEach_Class()
             {
 
-                long result = 0;
+                var dict = new Dictionary<int, Product>(listOfProducts.Count);
                 foreach (var product in listOfProducts)
                 {
-                    result += product.Id;
+                    dict.Add(product.Id, product);
                 }
-                return result;
+                return dict;
             }
 
 
             [Benchmark]
-            public long ForEachWithLambda()
+            public Dictionary<int, Product> ForEachWithLambda_Class()
             {
-                long result = 0;
+                var dict = new Dictionary<int, Product>(listOfProducts.Count);
                 listOfProducts.ForEach(product =>
                 {
-                    result += product.Id;
+                    dict.Add(product.Id, product);
                 });
 
-                return result;
+                return dict;
             }
 
 
 
         }
 
-   }
+    }
 
 
 }

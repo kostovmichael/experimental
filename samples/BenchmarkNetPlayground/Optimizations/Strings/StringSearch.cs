@@ -1,213 +1,214 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BenchmarkDotNet.Attributes;
-using BenchmarkNetPlayground.DummyClasses;
-using BenchmarkNetPlayground.Services;
-
-using PatternsAndConcepts.Algs;
-
-namespace BenchmarkNetPlayground.Optimizations.Strings
+﻿namespace BenchmarkNetPlayground.Optimizations.Strings
 {
-   public class StringSearch
-   {
-      public class DictionaryVsTrie
-      {
+    using BenchmarkDotNet.Attributes;
 
-         private List<Product> listOfProducts;
-         private string[] arrayOfStrings;
+    using BenchmarkNetPlayground.Services;
 
-         private Dictionary<string, int> dictionaryIndexByName;
-         private TernarySearchTrie<int> trieIndexByName;
+    using PatternsAndConcepts.Algs;
+    using PatternsAndConcepts.DummyModels;
 
-         private List<string> arrayOfRandomSearchStrings;
-
-         [GlobalSetup]
-         public void GlobalSetup()
-         {
-            arrayOfStrings = TestDataRetrievalService.GetCommonWordsTestData();
-            int upperBound = arrayOfStrings.Length;
-            listOfProducts = new List<Product>(upperBound);
-
-            dictionaryIndexByName = new Dictionary<string, int>(upperBound);
-            trieIndexByName = new TernarySearchTrie<int>();
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
 
+    public class StringSearch
+    {
+        public class DictionaryVsTrie
+        {
 
-            for (int i = 0; i < upperBound; i++)
+            private List<Product> listOfProducts;
+            private string[] arrayOfStrings;
+
+            private Dictionary<string, int> dictionaryIndexByName;
+            private TernarySearchTrie<int> trieIndexByName;
+
+            private List<string> arrayOfRandomSearchStrings;
+
+            [GlobalSetup]
+            public void GlobalSetup()
             {
-               listOfProducts.Add(new Product()
-               {
-                  Id = i + 100,
-                  Name = arrayOfStrings[i]
-               });
-               dictionaryIndexByName.Add(arrayOfStrings[i], i);
-               trieIndexByName.Put(arrayOfStrings[i].AsSpan(), i);
+                arrayOfStrings = TestDataRetrievalService.GetCommonWordsTestData();
+                int upperBound = arrayOfStrings.Length;
+                listOfProducts = new List<Product>(upperBound);
+
+                dictionaryIndexByName = new Dictionary<string, int>(upperBound);
+                trieIndexByName = new TernarySearchTrie<int>();
+
+
+
+                for (int i = 0; i < upperBound; i++)
+                {
+                    listOfProducts.Add(new Product()
+                    {
+                        Id = i + 100,
+                        Name = arrayOfStrings[i]
+                    });
+                    dictionaryIndexByName.Add(arrayOfStrings[i], i);
+                    trieIndexByName.Put(arrayOfStrings[i].AsSpan(), i);
+                }
+
+                var random = new Random();
+                int searchStringsUpperBound = 10000;
+                arrayOfRandomSearchStrings = new List<string>(searchStringsUpperBound);
+                for (int i = 0; i < searchStringsUpperBound; i++)
+                {
+                    int randomIndex = random.Next(0, upperBound - 1);
+                    string randomString = arrayOfStrings[randomIndex];
+
+                    if (randomIndex % 2 == 0)
+                    {
+                        arrayOfRandomSearchStrings.Add(randomString.Reverse().ToString());
+                    }
+                    else
+                    {
+                        arrayOfRandomSearchStrings.Add(randomString);
+                    }
+                }
+
+
             }
 
-            var random = new Random();
-            int searchStringsUpperBound = 10000;
-            arrayOfRandomSearchStrings = new List<string>(searchStringsUpperBound);
-            for (int i = 0; i < searchStringsUpperBound; i++)
+            [Benchmark]
+            public List<Product> RetriveFromDictionary()
             {
-               int randomIndex = random.Next(0, upperBound - 1);
-               string randomString = arrayOfStrings[randomIndex];
+                List<Product> listOfFoundProduct = new List<Product>(5000);
+                int missedCount = 0;
+                for (int i = 0; i < arrayOfRandomSearchStrings.Count; i++)
+                {
+                    if (dictionaryIndexByName.TryGetValue(arrayOfRandomSearchStrings[i], out int indexOfProduct))
+                    {
+                        listOfFoundProduct.Add(listOfProducts[indexOfProduct]);
+                    }
+                    else
+                    {
+                        missedCount++;
+                    }
 
-               if (randomIndex % 2 == 0)
-               {
-                  arrayOfRandomSearchStrings.Add(randomString.Reverse().ToString());
-               }
-               else
-               {
-                  arrayOfRandomSearchStrings.Add(randomString);
-               }
+                }
+                //Console.WriteLine($"RetriveFromDictionary found: {listOfFoundProduct.Count.ToString()} missed: {missedCount.ToString()}");
+                return listOfFoundProduct;
             }
 
-
-         }
-
-         [Benchmark]
-         public List<Product> RetriveFromDictionary()
-         {
-            List<Product> listOfFoundProduct = new List<Product>(5000);
-            int missedCount = 0;
-            for (int i = 0; i < arrayOfRandomSearchStrings.Count; i++)
+            [Benchmark]
+            public List<Product> RetriveFromTrie()
             {
-               if(dictionaryIndexByName.TryGetValue(arrayOfRandomSearchStrings[i], out int indexOfProduct))
-               {
-                  listOfFoundProduct.Add(listOfProducts[indexOfProduct]);
-               }
-               else
-               {
-                  missedCount++;
-               }
-               
+                List<Product> listOfFoundProduct = new List<Product>(5000);
+                int missedCount = 0;
+                for (int i = 0; i < arrayOfRandomSearchStrings.Count; i++)
+                {
+                    var indexOfProduct = trieIndexByName.Get(arrayOfRandomSearchStrings[i].AsSpan());
+                    if (indexOfProduct > 0)
+                    {
+                        listOfFoundProduct.Add(listOfProducts[indexOfProduct]);
+                    }
+                    else
+                    {
+                        missedCount++;
+                    }
+                }
+                //Console.WriteLine($"RetriveFromTrie found: {listOfFoundProduct.Count.ToString()} missed: {missedCount.ToString()}");
+                return listOfFoundProduct;
             }
-            //Console.WriteLine($"RetriveFromDictionary found: {listOfFoundProduct.Count.ToString()} missed: {missedCount.ToString()}");
-            return listOfFoundProduct;
-         }
+        }
+        public class TrieVsDictionary
+        {
 
-         [Benchmark]
-         public List<Product> RetriveFromTrie()
-         {
-            List<Product> listOfFoundProduct = new List<Product>(5000);
-            int missedCount = 0;
-            for (int i = 0; i < arrayOfRandomSearchStrings.Count; i++)
+            private List<Product> listOfProducts;
+            private string[] arrayOfStrings;
+
+            private Dictionary<string, Product> dictionaryIndexByName;
+            private TernarySearchTrie<Product> trieIndexByName;
+
+            private List<string> arrayOfRandomSearchStrings;
+
+            [GlobalSetup]
+            public void GlobalSetup()
             {
-               var indexOfProduct = trieIndexByName.Get(arrayOfRandomSearchStrings[i].AsSpan());
-               if (indexOfProduct > 0)
-               {
-                  listOfFoundProduct.Add(listOfProducts[indexOfProduct]);
-               }
-               else
-               {
-                  missedCount++;
-               }
-            }
-            //Console.WriteLine($"RetriveFromTrie found: {listOfFoundProduct.Count.ToString()} missed: {missedCount.ToString()}");
-            return listOfFoundProduct;
-         }
-      }
-      public class TrieVsDictionary
-      {
+                arrayOfStrings = TestDataRetrievalService.GetCommonWordsTestData();
+                int upperBound = arrayOfStrings.Length;
+                listOfProducts = new List<Product>(upperBound);
 
-         private List<Product> listOfProducts;
-         private string[] arrayOfStrings;
-
-         private Dictionary<string, Product> dictionaryIndexByName;
-         private TernarySearchTrie<Product> trieIndexByName;
-
-         private List<string> arrayOfRandomSearchStrings;
-
-         [GlobalSetup]
-         public void GlobalSetup()
-         {
-            arrayOfStrings = TestDataRetrievalService.GetCommonWordsTestData();
-            int upperBound = arrayOfStrings.Length;
-            listOfProducts = new List<Product>(upperBound);
-
-            dictionaryIndexByName = new Dictionary<string, Product>(upperBound);
-            trieIndexByName = new TernarySearchTrie<Product>();
+                dictionaryIndexByName = new Dictionary<string, Product>(upperBound);
+                trieIndexByName = new TernarySearchTrie<Product>();
 
 
 
-            for (int i = 0; i < upperBound; i++)
-            {
-               var product = new Product()
-               {
-                  Id = i + 100,
-                  Name = arrayOfStrings[i]
-               };
-               listOfProducts.Add(product);
-               dictionaryIndexByName.Add(product.Name, product);
-               trieIndexByName.Put(product.Name.AsSpan(), product);
+                for (int i = 0; i < upperBound; i++)
+                {
+                    var product = new Product()
+                    {
+                        Id = i + 100,
+                        Name = arrayOfStrings[i]
+                    };
+                    listOfProducts.Add(product);
+                    dictionaryIndexByName.Add(product.Name, product);
+                    trieIndexByName.Put(product.Name.AsSpan(), product);
+                }
+
+                var random = new Random();
+                int searchStringsUpperBound = 10000;
+                arrayOfRandomSearchStrings = new List<string>(searchStringsUpperBound);
+                for (int i = 0; i < searchStringsUpperBound; i++)
+                {
+                    int randomIndex = random.Next(0, upperBound - 1);
+                    string randomString = arrayOfStrings[randomIndex];
+
+                    if (randomIndex % 2 == 0)
+                    {
+                        arrayOfRandomSearchStrings.Add(randomString.Reverse().ToString());
+                    }
+                    else
+                    {
+                        arrayOfRandomSearchStrings.Add(randomString);
+                    }
+                }
+
+
             }
 
-            var random = new Random();
-            int searchStringsUpperBound = 10000;
-            arrayOfRandomSearchStrings = new List<string>(searchStringsUpperBound);
-            for (int i = 0; i < searchStringsUpperBound; i++)
+            [Benchmark]
+            public List<Product> RetriveFromDictionary()
             {
-               int randomIndex = random.Next(0, upperBound - 1);
-               string randomString = arrayOfStrings[randomIndex];
+                List<Product> listOfFoundProduct = new List<Product>(5000);
+                int missedCount = 0;
+                for (int i = 0; i < arrayOfRandomSearchStrings.Count; i++)
+                {
+                    if (dictionaryIndexByName.TryGetValue(arrayOfRandomSearchStrings[i], out Product product))
+                    {
+                        listOfFoundProduct.Add(product);
+                    }
+                    else
+                    {
+                        missedCount++;
+                    }
 
-               if (randomIndex % 2 == 0)
-               {
-                  arrayOfRandomSearchStrings.Add(randomString.Reverse().ToString());
-               }
-               else
-               {
-                  arrayOfRandomSearchStrings.Add(randomString);
-               }
+                }
+                //Console.WriteLine($"RetriveFromDictionary found: {listOfFoundProduct.Count.ToString()} missed: {missedCount.ToString()}");
+                return listOfFoundProduct;
             }
 
-
-         }
-
-         [Benchmark]
-         public List<Product> RetriveFromDictionary()
-         {
-            List<Product> listOfFoundProduct = new List<Product>(5000);
-            int missedCount = 0;
-            for (int i = 0; i < arrayOfRandomSearchStrings.Count; i++)
+            [Benchmark]
+            public List<Product> RetriveFromTrie()
             {
-               if (dictionaryIndexByName.TryGetValue(arrayOfRandomSearchStrings[i], out Product product))
-               {
-                  listOfFoundProduct.Add(product);
-               }
-               else
-               {
-                  missedCount++;
-               }
-
+                List<Product> listOfFoundProduct = new List<Product>(5000);
+                int missedCount = 0;
+                for (int i = 0; i < arrayOfRandomSearchStrings.Count; i++)
+                {
+                    var product = trieIndexByName.Get(arrayOfRandomSearchStrings[i].AsSpan());
+                    if (product != null)
+                    {
+                        listOfFoundProduct.Add(product);
+                    }
+                    else
+                    {
+                        missedCount++;
+                    }
+                }
+                //Console.WriteLine($"RetriveFromTrie found: {listOfFoundProduct.Count.ToString()} missed: {missedCount.ToString()}");
+                return listOfFoundProduct;
             }
-            //Console.WriteLine($"RetriveFromDictionary found: {listOfFoundProduct.Count.ToString()} missed: {missedCount.ToString()}");
-            return listOfFoundProduct;
-         }
+        }
 
-         [Benchmark]
-         public List<Product> RetriveFromTrie()
-         {
-            List<Product> listOfFoundProduct = new List<Product>(5000);
-            int missedCount = 0;
-            for (int i = 0; i < arrayOfRandomSearchStrings.Count; i++)
-            {
-               var product = trieIndexByName.Get(arrayOfRandomSearchStrings[i].AsSpan());
-               if (product != null)
-               {
-                  listOfFoundProduct.Add(product);
-               }
-               else
-               {
-                  missedCount++;
-               }
-            }
-            //Console.WriteLine($"RetriveFromTrie found: {listOfFoundProduct.Count.ToString()} missed: {missedCount.ToString()}");
-            return listOfFoundProduct;
-         }
-      }
-
-   }
+    }
 }

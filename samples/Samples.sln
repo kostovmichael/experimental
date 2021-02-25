@@ -32,6 +32,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SandboxConsoleApp", "SandboxConsoleApp\SandboxConsoleApp.csproj", "{52DEBFA3-D330-4F84-A639-0AAA52CBB894}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +60,10 @@ Global
 		{BAA1D16D-41D9-42F9-91A9-DE0E7EAC5B1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAA1D16D-41D9-42F9-91A9-DE0E7EAC5B1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAA1D16D-41D9-42F9-91A9-DE0E7EAC5B1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52DEBFA3-D330-4F84-A639-0AAA52CBB894}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52DEBFA3-D330-4F84-A639-0AAA52CBB894}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52DEBFA3-D330-4F84-A639-0AAA52CBB894}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52DEBFA3-D330-4F84-A639-0AAA52CBB894}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,6 +79,7 @@ Global
 		{2D2CDA3B-50A3-4A57-B20F-CAAE9FB54A27} = {EF419EB5-16B9-4433-A91D-53E06D30CD1A}
 		{CCE068EE-BF0C-4814-82F5-A032701C779D} = {59274F45-01E1-46D6-8E3D-B097D2B6E819}
 		{BAA1D16D-41D9-42F9-91A9-DE0E7EAC5B1B} = {CCE068EE-BF0C-4814-82F5-A032701C779D}
+		{52DEBFA3-D330-4F84-A639-0AAA52CBB894} = {F4083A69-90A5-4D64-A829-F724161371D3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1C00310B-59F5-4369-9FD4-BE64B314CCBE}

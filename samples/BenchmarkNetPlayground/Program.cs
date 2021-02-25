@@ -22,30 +22,30 @@ namespace BenchmarkNetPlayground
         static void Main(string[] args)
         {
 
+            RunForLoopBenchmarks();
+
+            //BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
 
 
-         //BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
+            #region "String Search"
 
+            //   BenchmarkRunner.Run<Optimizations.Strings.StringSearch.TrieVsDictionary>
+            //(ManualConfigurations.GetManualConfig_Default_Job());
 
-         #region "String Search"
+            #endregion "String Search"
 
-         BenchmarkRunner.Run<Optimizations.Strings.StringSearch.TrieVsDictionary>
-         (ManualConfigurations.GetManualConfig_Default_Job());
+            #region "Value vs Ref Types"
 
-         #endregion "String Search"
+            //BenchmarkRunner.Run<RefAllocation>();
 
-         #region "Value vs Ref Types"
-
-         //BenchmarkRunner.Run<RefAllocation>();
-
-         #endregion "Value vs Ref Types"
+            #endregion "Value vs Ref Types"
 
 
 
-         #region "For loops"
+            #region "For loops"
 
-         //BenchmarkRunner.Run<Optimizations.Loops.ForLoopTesting.ForVsForEach>
-         //   (ManualConfigurations.GetManualConfig_Default_Job());
+
+
 
             #endregion "For loops"
 
@@ -78,6 +78,28 @@ namespace BenchmarkNetPlayground
             #endregion "Sorting"
 
         }
+        #region "For loops"
+
+        static void RunForLoopBenchmarks()
+        {
+            //Runs benchmarks against array of ref types
+
+            BenchmarkRunner.Run<Optimizations.Loops.ForLoops.ForVsForEach>
+               (ManualConfigurations.GetManualConfig_Default_Job());
+
+
+            //Runs benchmarks against aray of value types with sequential layout
+            BenchmarkRunner.Run<Optimizations.Loops.ForLoops.ForVsForEachUsingStructLayoutSequential>
+                (ManualConfigurations.GetManualConfig_Default_Job());
+
+
+            //Runs benchmarks against aray of value types vs ref types
+
+            BenchmarkRunner.Run<Optimizations.Loops.ForLoops.ForVsForEachClassVsSequentialStruct>
+                (ManualConfigurations.GetManualConfig_Default_Job());
+        }
+
+        #endregion "For loops"
 
     }
 }

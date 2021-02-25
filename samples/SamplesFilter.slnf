@@ -3,9 +3,8 @@
     "path": "Samples.sln",
     "projects": [
       "BenchmarkNetPlayground\\BenchmarkNetPlayground.csproj",
-      "MvcAndWebApiDotNetLegacy\\MvcAndWebApiDotNetLegacy.csproj",
-      "MvcAndWebApiDotNetThree\\MvcAndWebApiDotNetThree.csproj",
       "PerformanceConcepts\\PatternsAndConcepts.csproj",
+      "SandboxConsoleApp\\SandboxConsoleApp.csproj",
       "web\\MvcSample\\MvcAndWebApiDotNetFive.csproj"
     ]
   }

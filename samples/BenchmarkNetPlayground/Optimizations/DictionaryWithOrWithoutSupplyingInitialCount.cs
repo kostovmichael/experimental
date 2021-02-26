@@ -22,18 +22,18 @@
         }
 
 
-        [Benchmark]
-        public Dictionary<string, object> Value_As_Object_Without_Initial_Count()
-        {
-            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+        //[Benchmark(Baseline =true)]
+        //public Dictionary<string, object> Value_As_Object_Without_Initial_Count()
+        //{
+        //    Dictionary<string, object> dictionary = new Dictionary<string, object>();
 
-            for (int i = 0; i < arrayOfStrings.Length; i++)
-            {
-                dictionary.Add(arrayOfStrings[i], arrayOfStrings[i]);
-            }
+        //    for (int i = 0; i < arrayOfStrings.Length; i++)
+        //    {
+        //        dictionary.Add(arrayOfStrings[i], arrayOfStrings[i]);
+        //    }
 
-            return dictionary;
-        }
+        //    return dictionary;
+        //}
         [Benchmark]
         public Dictionary<string, string> Value_As_String_Without_Initial_Count()
         {
@@ -46,33 +46,33 @@
 
             return dictionary;
         }
-        [Benchmark]
-        public Dictionary<string, dynamic> Value_As_Dynamic_Without_Initial_Count()
-        {
-            Dictionary<string, dynamic> dictionary = new Dictionary<string, dynamic>();
+        //[Benchmark]
+        //public Dictionary<string, dynamic> Value_As_Dynamic_Without_Initial_Count()
+        //{
+        //    Dictionary<string, dynamic> dictionary = new Dictionary<string, dynamic>();
 
-            for (int i = 0; i < arrayOfStrings.Length; i++)
-            {
-                dictionary.Add(arrayOfStrings[i], arrayOfStrings[i]);
-            }
+        //    for (int i = 0; i < arrayOfStrings.Length; i++)
+        //    {
+        //        dictionary.Add(arrayOfStrings[i], arrayOfStrings[i]);
+        //    }
 
-            return dictionary;
-        }
+        //    return dictionary;
+        //}
 
 
 
-        [Benchmark]
-        public Dictionary<string, object> Value_As_Object_With_Initial_Count()
-        {
-            Dictionary<string, object> dictionary = new Dictionary<string, object>(arrayOfStrings.Length);
+        //[Benchmark]
+        //public Dictionary<string, object> Value_As_Object_With_Initial_Count()
+        //{
+        //    Dictionary<string, object> dictionary = new Dictionary<string, object>(arrayOfStrings.Length);
 
-            for (int i = 0; i < arrayOfStrings.Length; i++)
-            {
-                dictionary.Add(arrayOfStrings[i], arrayOfStrings[i]);
-            }
+        //    for (int i = 0; i < arrayOfStrings.Length; i++)
+        //    {
+        //        dictionary.Add(arrayOfStrings[i], arrayOfStrings[i]);
+        //    }
 
-            return dictionary;
-        }
+        //    return dictionary;
+        //}
         [Benchmark]
         public Dictionary<string, string> Value_As_String_With_Initial_Count()
         {
@@ -85,18 +85,18 @@
 
             return dictionary;
         }
-        [Benchmark]
-        public Dictionary<string, dynamic> Value_As_Dynamic_With_Initial_Count()
-        {
-            Dictionary<string, dynamic> dictionary = new Dictionary<string, dynamic>(arrayOfStrings.Length);
+        //[Benchmark]
+        //public Dictionary<string, dynamic> Value_As_Dynamic_With_Initial_Count()
+        //{
+        //    Dictionary<string, dynamic> dictionary = new Dictionary<string, dynamic>(arrayOfStrings.Length);
 
-            for (int i = 0; i < arrayOfStrings.Length; i++)
-            {
-                dictionary.Add(arrayOfStrings[i], arrayOfStrings[i]);
-            }
+        //    for (int i = 0; i < arrayOfStrings.Length; i++)
+        //    {
+        //        dictionary.Add(arrayOfStrings[i], arrayOfStrings[i]);
+        //    }
 
-            return dictionary;
-        }
+        //    return dictionary;
+        //}
 
     }
 }

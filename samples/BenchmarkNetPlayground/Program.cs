@@ -12,6 +12,7 @@ namespace BenchmarkNetPlayground
 
     using Optimizations;
     using Optimizations.Loops;
+    using Optimizations.Memory;
 
     using ScratchPad;
 
@@ -22,7 +23,7 @@ namespace BenchmarkNetPlayground
         static void Main(string[] args)
         {
 
-            RunForLoopBenchmarks();
+            //RunForLoopBenchmarks();
 
             //BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
 
@@ -63,7 +64,13 @@ namespace BenchmarkNetPlayground
 
             // Memory Benchmarks
             //BenchmarkRunner.Run<IntroNativeMemory>();
+            //var t1 = new StringAllocations.SingleStringVsChunks();
+            //var singleString = t1.GetSingleString();
+            //var array = t1.GetListOfStrings();
+            //Console.WriteLine(array[0]);
 
+            //Console.WriteLine(array[1]);
+            BenchmarkRunner.Run<StringAllocations.SingleStringVsChunks>();
             // Compiler Inlining Benchmarks
             //BenchmarkRunner.Run<Optimizations.Inlining>();
 

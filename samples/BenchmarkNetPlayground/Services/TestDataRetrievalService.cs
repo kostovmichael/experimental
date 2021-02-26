@@ -1,7 +1,6 @@
-﻿using System;
-
-namespace BenchmarkNetPlayground.Services
+﻿namespace BenchmarkNetPlayground.Services
 {
+    using System;
     using System.IO;
 
     public class TestDataRetrievalService
@@ -28,11 +27,11 @@ namespace BenchmarkNetPlayground.Services
         }
         public static string[] GetMThesaurStringArray()
         {
-           return GetTestDataStringArrayFromFile("mthesaur.txt",new char[] { ',' });
+            return GetTestDataStringArrayFromFile("mthesaur.txt", new char[] { ',' });
         }
 
 
-      public static string[] GetTestDataStringArrayFromFile(string fileName, char[] separator)
+        public static string[] GetTestDataStringArrayFromFile(string fileName, char[] separator)
         {
             string fileFullPath = Path.Combine(GetAppDataDirectoryPath(), fileName);
             string fileRawText = System.IO.File.ReadAllText(fileFullPath);

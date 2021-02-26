@@ -67,7 +67,7 @@
                 return dict;
             }
 
-            [Benchmark(Baseline =true)]
+            [Benchmark]
             public Dictionary<int, Product> ForEach()
             {
 
@@ -80,17 +80,17 @@
             }
 
 
-            [Benchmark]
-            public Dictionary<int, Product> ForEachWithLambda()
-            {
-                var dict = new Dictionary<int, Product>(listOfProducts.Count);
-                listOfProducts.ForEach(product =>
-                    {
-                        dict.Add(product.Id, product);
-                    });
+            //[Benchmark]
+            //public Dictionary<int, Product> ForEachWithLambda()
+            //{
+            //    var dict = new Dictionary<int, Product>(listOfProducts.Count);
+            //    listOfProducts.ForEach(product =>
+            //        {
+            //            dict.Add(product.Id, product);
+            //        });
 
-                return dict;
-            }
+            //    return dict;
+            //}
 
 
 

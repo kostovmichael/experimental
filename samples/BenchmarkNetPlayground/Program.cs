@@ -23,7 +23,7 @@ namespace BenchmarkNetPlayground
         static void Main(string[] args)
         {
 
-         //RunForLoopBenchmarks();
+         RunForLoopBenchmarks();
 
          //BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
 
@@ -56,8 +56,8 @@ namespace BenchmarkNetPlayground
          //BenchmarkRunner.Run<DictionaryConcreteVsInterface>(
          //  ManualConfigurations.GetManualConfig_Net472_CoreRt31_64());
 
-         BenchmarkRunner.Run<Optimizations.DictionaryWithOrWithoutSupplyingInitialCount>(
-             ManualConfigurations.GetManualConfig_Default_Job());
+         //BenchmarkRunner.Run<Optimizations.DictionaryWithOrWithoutSupplyingInitialCount>(
+         //    ManualConfigurations.GetManualConfig_Default_Job());
 
 
          #endregion "Dictionary Benchmarks"
@@ -95,15 +95,15 @@ namespace BenchmarkNetPlayground
                (ManualConfigurations.GetManualConfig_Default_Job());
 
 
-            //Runs benchmarks against aray of value types with sequential layout
-            BenchmarkRunner.Run<Optimizations.Loops.ForLoops.ForVsForEachUsingStructLayoutSequential>
-                (ManualConfigurations.GetManualConfig_Default_Job());
+            ////Runs benchmarks against aray of value types with sequential layout
+            //BenchmarkRunner.Run<Optimizations.Loops.ForLoops.ForVsForEachUsingStructLayoutSequential>
+            //    (ManualConfigurations.GetManualConfig_Default_Job());
 
 
-            //Runs benchmarks against aray of value types vs ref types
+            ////Runs benchmarks against aray of value types vs ref types
 
-            BenchmarkRunner.Run<Optimizations.Loops.ForLoops.ForVsForEachClassVsSequentialStruct>
-                (ManualConfigurations.GetManualConfig_Default_Job());
+            //BenchmarkRunner.Run<Optimizations.Loops.ForLoops.ForVsForEachClassVsSequentialStruct>
+            //    (ManualConfigurations.GetManualConfig_Default_Job());
         }
 
         #endregion "For loops"

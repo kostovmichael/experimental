@@ -13,66 +13,71 @@ namespace BenchmarkNetPlayground
     using Optimizations;
     using Optimizations.Loops;
     using Optimizations.Memory;
+    using Optimizations.Pooling;
 
     using ScratchPad;
 
     using System;
+    using System.Collections.Generic;
 
-   using static BenchmarkNetPlayground.Optimizations.Collections.Lists;
+    using static BenchmarkNetPlayground.Optimizations.Collections.Lists;
 
-   public class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-
-         RunForLoopBenchmarks();
-
-         //BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
+            //ArrayPooling
+            //RunForLoopBenchmarks();
 
 
-         #region "String Search"
-
-         //   BenchmarkRunner.Run<Optimizations.Strings.StringSearch.TrieVsDictionary>
-         //(ManualConfigurations.GetManualConfig_Default_Job());
-
-         #endregion "String Search"
-
-         #region "Value vs Ref Types"
-
-         //BenchmarkRunner.Run<RefAllocation>();
-
-         #endregion "Value vs Ref Types"
+            //BenchmarkRunner.Run<ArrayPooling>
+            //    (ManualConfigurations.GetManualConfig_Default_Job());
+            //BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
 
 
+            #region "String Search"
 
-         #region "For loops"
+            //   BenchmarkRunner.Run<Optimizations.Strings.StringSearch.TrieVsDictionary>
+            //(ManualConfigurations.GetManualConfig_Default_Job());
 
+            #endregion "String Search"
+
+            #region "Value vs Ref Types"
+
+            //BenchmarkRunner.Run<RefAllocation>();
+
+            #endregion "Value vs Ref Types"
 
 
 
-         #endregion "For loops"
+            #region "For loops"
 
 
-         #region "Dictionary Benchmarks"
-
-         //BenchmarkRunner.Run<DictionaryConcreteVsInterface>(
-         //  ManualConfigurations.GetManualConfig_Net472_CoreRt31_64());
-
-         //BenchmarkRunner.Run<Optimizations.DictionaryWithOrWithoutSupplyingInitialCount>(
-         //    ManualConfigurations.GetManualConfig_Default_Job());
 
 
-         #endregion "Dictionary Benchmarks"
+            #endregion "For loops"
 
-         // Memory Benchmarks
-         //BenchmarkRunner.Run<IntroNativeMemory>();
-         //var t1 = new StringAllocations.SingleStringVsChunks();
-         //var singleString = t1.GetSingleString();
-         //var array = t1.GetListOfStrings();
-         //Console.WriteLine(array[0]);
 
-         //Console.WriteLine(array[1]);
-         //BenchmarkRunner.Run<StringAllocations.SingleStringVsChunks>();
+            #region "Dictionary Benchmarks"
+
+            //BenchmarkRunner.Run<DictionaryConcreteVsInterface>(
+            //  ManualConfigurations.GetManualConfig_Net472_CoreRt31_64());
+
+            //BenchmarkRunner.Run<Optimizations.DictionaryWithOrWithoutSupplyingInitialCount>(
+            //    ManualConfigurations.GetManualConfig_Default_Job());
+
+
+            #endregion "Dictionary Benchmarks"
+
+            // Memory Benchmarks
+            //BenchmarkRunner.Run<IntroNativeMemory>();
+            //var t1 = new StringAllocations.SingleStringVsChunks();
+            //var singleString = t1.GetSingleString();
+            //var array = t1.GetListOfStrings();
+            //Console.WriteLine(array[0]);
+
+            //Console.WriteLine(array[1]);
+            //BenchmarkRunner.Run<StringAllocations.SingleStringVsChunks>();
             // Compiler Inlining Benchmarks
             //BenchmarkRunner.Run<Optimizations.Inlining>();
 
@@ -96,20 +101,20 @@ namespace BenchmarkNetPlayground
             //BenchmarkRunner.Run<Optimizations.Loops.ForLoops.ForVsForEach>
             //   (ManualConfigurations.GetManualConfig_Default_Job());
 
-         BenchmarkRunner.Run<ListWithOrWithoutSupplyingInitialCount>
-               (ManualConfigurations.GetManualConfig_Default_Job());
+            BenchmarkRunner.Run<ListWithOrWithoutSupplyingInitialCount>
+                  (ManualConfigurations.GetManualConfig_Default_Job());
 
 
-         ////Runs benchmarks against aray of value types with sequential layout
-         //BenchmarkRunner.Run<Optimizations.Loops.ForLoops.ForVsForEachUsingStructLayoutSequential>
-         //    (ManualConfigurations.GetManualConfig_Default_Job());
+            ////Runs benchmarks against aray of value types with sequential layout
+            //BenchmarkRunner.Run<Optimizations.Loops.ForLoops.ForVsForEachUsingStructLayoutSequential>
+            //    (ManualConfigurations.GetManualConfig_Default_Job());
 
 
-         ////Runs benchmarks against aray of value types vs ref types
+            ////Runs benchmarks against aray of value types vs ref types
 
-         //BenchmarkRunner.Run<Optimizations.Loops.ForLoops.ForVsForEachClassVsSequentialStruct>
-         //    (ManualConfigurations.GetManualConfig_Default_Job());
-      }
+            //BenchmarkRunner.Run<Optimizations.Loops.ForLoops.ForVsForEachClassVsSequentialStruct>
+            //    (ManualConfigurations.GetManualConfig_Default_Job());
+        }
 
         #endregion "For loops"
 

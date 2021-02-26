@@ -34,10 +34,11 @@
 
         //    return dictionary;
         //}
-        [Benchmark(Baseline =true)]
+        [Benchmark(Baseline = true)]
         public Dictionary<string, string> Dictionary_Without_Initial_Count()
         {
-            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+
+            var dictionary = new Dictionary<string, string>();
 
             for (int i = 0; i < arrayOfStrings.Length; i++)
             {
@@ -76,7 +77,7 @@
         [Benchmark]
         public Dictionary<string, string> Dictionary_With_Initial_Count()
         {
-            Dictionary<string, string> dictionary = new Dictionary<string, string>(arrayOfStrings.Length);
+            var dictionary = new Dictionary<string, string>(2600000);
 
             for (int i = 0; i < arrayOfStrings.Length; i++)
             {

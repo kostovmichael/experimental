@@ -34,8 +34,8 @@
 
         //    return dictionary;
         //}
-        [Benchmark]
-        public Dictionary<string, string> Value_As_String_Without_Initial_Count()
+        [Benchmark(Baseline =true)]
+        public Dictionary<string, string> Dictionary_Without_Initial_Count()
         {
             Dictionary<string, string> dictionary = new Dictionary<string, string>();
 
@@ -74,7 +74,7 @@
         //    return dictionary;
         //}
         [Benchmark]
-        public Dictionary<string, string> Value_As_String_With_Initial_Count()
+        public Dictionary<string, string> Dictionary_With_Initial_Count()
         {
             Dictionary<string, string> dictionary = new Dictionary<string, string>(arrayOfStrings.Length);
 

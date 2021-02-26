@@ -18,7 +18,9 @@ namespace BenchmarkNetPlayground
 
     using System;
 
-    public class Program
+   using static BenchmarkNetPlayground.Optimizations.Collections.Lists;
+
+   public class Program
     {
         static void Main(string[] args)
         {
@@ -91,20 +93,23 @@ namespace BenchmarkNetPlayground
         {
             //Runs benchmarks against array of ref types
 
-            BenchmarkRunner.Run<Optimizations.Loops.ForLoops.ForVsForEach>
+            //BenchmarkRunner.Run<Optimizations.Loops.ForLoops.ForVsForEach>
+            //   (ManualConfigurations.GetManualConfig_Default_Job());
+
+         BenchmarkRunner.Run<ListWithOrWithoutSupplyingInitialCount>
                (ManualConfigurations.GetManualConfig_Default_Job());
 
 
-            ////Runs benchmarks against aray of value types with sequential layout
-            //BenchmarkRunner.Run<Optimizations.Loops.ForLoops.ForVsForEachUsingStructLayoutSequential>
-            //    (ManualConfigurations.GetManualConfig_Default_Job());
+         ////Runs benchmarks against aray of value types with sequential layout
+         //BenchmarkRunner.Run<Optimizations.Loops.ForLoops.ForVsForEachUsingStructLayoutSequential>
+         //    (ManualConfigurations.GetManualConfig_Default_Job());
 
 
-            ////Runs benchmarks against aray of value types vs ref types
+         ////Runs benchmarks against aray of value types vs ref types
 
-            //BenchmarkRunner.Run<Optimizations.Loops.ForLoops.ForVsForEachClassVsSequentialStruct>
-            //    (ManualConfigurations.GetManualConfig_Default_Job());
-        }
+         //BenchmarkRunner.Run<Optimizations.Loops.ForLoops.ForVsForEachClassVsSequentialStruct>
+         //    (ManualConfigurations.GetManualConfig_Default_Job());
+      }
 
         #endregion "For loops"
 

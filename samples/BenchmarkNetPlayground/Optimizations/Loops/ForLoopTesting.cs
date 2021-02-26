@@ -67,7 +67,7 @@
                 return dict;
             }
 
-            [Benchmark]
+            [Benchmark(Baseline =true)]
             public Dictionary<int, Product> ForEach()
             {
 

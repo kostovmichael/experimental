@@ -12,6 +12,10 @@ using System.Threading.Tasks;
 
 namespace MvcAndWebApiDotNetFive
 {
+    using Microsoft.AspNetCore.ResponseCompression;
+
+    using System.IO.Compression;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -24,6 +28,21 @@ namespace MvcAndWebApiDotNetFive
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<GzipCompressionProviderOptions>
+            (options =>
+            {
+                options.Level = CompressionLevel.Fastest;
+            });
+            services.AddResponseCompression(options =>
+            {
+                options.EnableForHttps = true;
+                options.Providers.Add<BrotliCompressionProvider>();
+                options.Providers.Add<GzipCompressionProvider>();
+                options.MimeTypes =
+                    ResponseCompressionDefaults.MimeTypes.Concat(
+                        new[] { "image/svg+xml" });
+
+            });
             services.AddHttpClient();
             services.AddControllersWithViews();
         }
@@ -31,6 +50,7 @@ namespace MvcAndWebApiDotNetFive
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseResponseCompression();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

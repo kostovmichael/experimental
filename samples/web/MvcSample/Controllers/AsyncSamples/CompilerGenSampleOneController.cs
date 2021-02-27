@@ -1,10 +1,4 @@
-﻿
-
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Net.Http;
-using System.Runtime.CompilerServices;
-
+﻿// ReSharper disable All
 namespace MvcAndWebApiDotNetFive.Controllers.AsyncSamples
 {
     using Microsoft.AspNetCore.Mvc;
@@ -13,6 +7,7 @@ namespace MvcAndWebApiDotNetFive.Controllers.AsyncSamples
     using MvcAndWebApiDotNetFive.Models;
 
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Net.Http;
     using System.Runtime.CompilerServices;
@@ -35,11 +30,11 @@ namespace MvcAndWebApiDotNetFive.Controllers.AsyncSamples
 
             private HttpResponseMessage responseMessage;
 
-            private ResponseModel responseModel;
+            private CompilerGenerated_ResponseModel responseModel;
 
             private HttpResponseMessage httpResponseMessage_2;
 
-            private ResponseModel responseModel_2;
+            private CompilerGenerated_ResponseModel responseModel_2;
 
             private string resultValue;
 
@@ -85,7 +80,7 @@ namespace MvcAndWebApiDotNetFive.Controllers.AsyncSamples
                     httpResponseMessage_2 = awaiter2.GetResult();
                     responseMessage = httpResponseMessage_2;
                     httpResponseMessage_2 = null;
-                    responseModel = new ResponseModel();
+                    responseModel = new CompilerGenerated_ResponseModel();
                     if (responseMessage.IsSuccessStatusCode)
                     {
                         responseModel.Success = true;
@@ -173,7 +168,7 @@ namespace MvcAndWebApiDotNetFive.Controllers.AsyncSamples
         }
     }
 
-    public class ResponseModel
+    public class CompilerGenerated_ResponseModel
     {
         [CompilerGenerated]
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

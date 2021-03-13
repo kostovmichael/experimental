@@ -27,9 +27,9 @@ namespace PatternsAndConcepts.Services
 
             return listOfProducts;
         }
-        public static List<ProductStructLayoutSequential> Generate_Medium_List_Of_Product_Structs()
+        public static List<ProductStructLayoutSequential> Generate_Medium_List_Of_Product_Structs(string filePath = null)
         {
-            string[] arrayOfStrings = TestDataRetrievalService.GetCommonWordsTestData();
+            string[] arrayOfStrings = TestDataRetrievalService.GetCommonWordsTestData(filePath);
             int upperBound = arrayOfStrings.Length;
             var listOfProducts = new List<ProductStructLayoutSequential>(upperBound);
             for (int i = 0; i < upperBound; i++)

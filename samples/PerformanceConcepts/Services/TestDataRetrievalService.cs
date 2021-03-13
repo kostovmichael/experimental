@@ -24,9 +24,9 @@
             return appDataDirectoryPath;
         }
 
-        public static string[] GetCommonWordsTestData()
+        public static string[] GetCommonWordsTestData(string filePath = null)
         {
-            return GetTestDataStringArrayFromFile("commonWords.txt", newLineSeparator);
+            return GetTestDataStringArrayFromFile(filePath, "commonWords.txt", newLineSeparator);
         }
         public static string[] GetMThesaurStringArray()
         {
@@ -36,7 +36,17 @@
 
         public static string[] GetTestDataStringArrayFromFile(string fileName, char[] separator)
         {
-            string fileFullPath = Path.Combine(GetAppDataDirectoryPath(), fileName);
+            return GetTestDataStringArrayFromFile(null, fileName, separator);
+        }
+
+
+        public static string[] GetTestDataStringArrayFromFile(string pathToFile, string fileName, char[] separator)
+        {
+            if (pathToFile == null)
+            {
+                pathToFile = GetAppDataDirectoryPath();
+            }
+            string fileFullPath = Path.Combine(pathToFile, fileName);
             string fileRawText = System.IO.File.ReadAllText(fileFullPath);
             string[] arrayOfStrings = fileRawText.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             return arrayOfStrings;

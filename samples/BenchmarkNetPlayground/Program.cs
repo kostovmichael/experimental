@@ -1,4 +1,6 @@
 ﻿
+using BenchmarkNetPlayground.Optimizations.DataStructures;
+
 namespace BenchmarkNetPlayground
 {
     using BenchmarkDotNet.Running;
@@ -27,7 +29,9 @@ namespace BenchmarkNetPlayground
         static void Main(string[] args)
         {
 
-            BenchmarkRunner.Run<ArrayPooling.ArrayPoolOfBytes>();
+         var test = new TreesAndHashTables.TrieVsDictionary();
+         test.GlobalSetup();
+            //BenchmarkRunner.Run<ArrayPooling.ArrayPoolOfBytes>();
         }
         #region "For loops"
 

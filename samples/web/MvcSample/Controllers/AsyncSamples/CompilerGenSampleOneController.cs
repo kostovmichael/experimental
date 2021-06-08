@@ -98,12 +98,14 @@ namespace MvcAndWebApiDotNetFive.Controllers.AsyncSamples
                     }
                     responseModel.Message = "Failed to load data from API";
                     goto IL_019a;
+
                     IL_0157:
                     resultValue = awaiter.GetResult();
                     responseModel_2.Message = resultValue;
                     responseModel_2 = null;
                     resultValue = null;
                     goto IL_019a;
+
                     IL_019a:
                     result = (ActionResult)this.sampleOneControllerInstance.Json((object)this.responseModel);
                 }
